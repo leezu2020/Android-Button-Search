@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -28,12 +29,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         srchbtn1 = findViewById(R.id.searchBtn1);
+        srchbtn2 = findViewById(R.id.searchBtn2);
+        srchbtn3 = findViewById(R.id.searchBtn3);
+        srchbtn4 = findViewById(R.id.searchBtn4);
+
         srchbtn1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 Intent intent = new Intent(MainActivity.this, activity_setting.class);
                 //버튼 값 넘겨주기
                 intent.putExtra("num","1");
+                if(srchEngine1.contains("naver"))
+                    intent.putExtra("srchEngine1","naver");
+                else if(srchEngine1.contains("daum"))
+                    intent.putExtra("srchEngine1","daum");
                 intent.putExtra("srchbtn1",srchbtn1.getText().toString());
                 startActivityForResult(intent, CODE);
                 return true;
@@ -49,13 +58,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        srchbtn2 = findViewById(R.id.searchBtn2);
         srchbtn2.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 Intent intent = new Intent(MainActivity.this, activity_setting.class);
                 //버튼 값 넘겨주기
                 intent.putExtra("num","2");
+                if(srchEngine2.contains("naver"))
+                    intent.putExtra("srchEngine2","naver");
+                else if(srchEngine2.contains("daum"))
+                    intent.putExtra("srchEngine2","daum");
                 intent.putExtra("srchbtn2",srchbtn2.getText().toString());
                 startActivityForResult(intent, CODE);
 
@@ -72,13 +84,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        srchbtn3 = findViewById(R.id.searchBtn3);
+
         srchbtn3.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 Intent intent = new Intent(MainActivity.this, activity_setting.class);
                 //버튼 값 넘겨주기
                 intent.putExtra("num","3");
+                if(srchEngine3.contains("naver"))
+                    intent.putExtra("srchEngine3","naver");
+                else if(srchEngine3.contains("daum"))
+                    intent.putExtra("srchEngine3","daum");
                 intent.putExtra("srchbtn3",srchbtn3.getText().toString());
                 startActivityForResult(intent, CODE);
 
@@ -95,17 +111,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        srchbtn4 = findViewById(R.id.searchBtn4);
+
         srchbtn4.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 Intent intent = new Intent(MainActivity.this, activity_setting.class);
                 //버튼 값 넘겨주기
                 intent.putExtra("num","4");
+                if(srchEngine4.contains("naver"))
+                    intent.putExtra("srchEngine4","naver");
+                else if(srchEngine4.contains("daum"))
+                    intent.putExtra("srchEngine4","daum");
                 intent.putExtra("srchbtn4",srchbtn4.getText().toString());
                 startActivityForResult(intent, CODE);
 
-                return true;
+                return false;
             }
         });
 
@@ -148,5 +168,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

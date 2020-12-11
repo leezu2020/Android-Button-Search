@@ -20,7 +20,7 @@ public class activity_setting extends AppCompatActivity {
     private RadioGroup rg;
     private EditText srchword;
     private Button backbtn;
-    private RadioButton rb;
+    private RadioButton rb, rb_n, rb_d;
     static String srchEngine;
     private static final int REQUEST_CODE = 1;
     private static String number = "";
@@ -38,6 +38,16 @@ public class activity_setting extends AppCompatActivity {
         Intent intent_get = getIntent();
         number = intent_get.getStringExtra("num");
         srchword.setText(intent_get.getStringExtra("srchbtn"+number));
+        rb_n = findViewById(R.id.naverbtn);
+        rb_d = findViewById(R.id.daumbtn);
+        switch (intent_get.getStringExtra("srchEngine"+number)){
+            case "naver":
+                rg.check(rb_n.getId());
+                break;
+            case "daum":
+                rg.check(rb_d.getId());
+                break;
+        }
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
