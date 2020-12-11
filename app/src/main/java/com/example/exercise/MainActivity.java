@@ -7,9 +7,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.util.prefs.PreferenceChangeEvent;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,10 +21,10 @@ public class MainActivity extends AppCompatActivity {
     private Button srchbtn2;
     private Button srchbtn3;
     private Button srchbtn4;
-    private static String srchEngine1 = "http:/m.search.naver.com/search.naver?query=";
-    private static String srchEngine2 = "http:/m.search.naver.com/search.naver?query=";
-    private static String srchEngine3 = "http:/m.search.naver.com/search.naver?query=";
-    private static String srchEngine4 = "http:/m.search.naver.com/search.naver?query=";
+    private static String srchEngine1;
+    private static String srchEngine2;
+    private static String srchEngine3;
+    private static String srchEngine4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,16 @@ public class MainActivity extends AppCompatActivity {
         srchbtn2 = findViewById(R.id.searchBtn2);
         srchbtn3 = findViewById(R.id.searchBtn3);
         srchbtn4 = findViewById(R.id.searchBtn4);
+
+        SharedPreferences pref = getSharedPreferences("pref",0);
+        srchbtn1.setText(pref.getString("b1","속보"));
+        srchEngine1 = pref.getString("e1","http:/m.search.naver.com/search.naver?query=");
+        srchbtn2.setText(pref.getString("b2","코로나"));
+        srchEngine2 = pref.getString("e2","http:/m.search.naver.com/search.naver?query=");
+        srchbtn3.setText(pref.getString("b3","날씨"));
+        srchEngine3 = pref.getString("e3","http:/m.search.naver.com/search.naver?query=");
+        srchbtn4.setText(pref.getString("b4","경제"));
+        srchEngine4 = pref.getString("e4","http:/m.search.naver.com/search.naver?query=");
 
         srchbtn1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -173,5 +186,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("pref",0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        String btn1 = srchbtn1.getText().toString();
+        String Engine1 = srchEngine1;
+        String btn2 = srchbtn2.getText().toString();
+        String Engine2 = srchEngine2;
+        String btn3 = srchbtn3.getText().toString();
+        String Engine3 = srchEngine3;
+        String btn4 = srchbtn4.getText().toString();
+        String Engine4 = srchEngine4;
+
+        editor.putString("b1",btn1);
+        editor.putString("b2",btn2);
+        editor.putString("b3",btn3);
+        editor.putString("b4",btn4);
+        editor.putString("e1",Engine1);
+        editor.putString("e2",Engine2);
+        editor.putString("e3",Engine3);
+        editor.putString("e4",Engine4);
+
+        editor.commit();
     }
 }
