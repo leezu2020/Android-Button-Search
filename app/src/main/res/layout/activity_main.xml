@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/test_label"
+        android:layout_width="290dp"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="테스트 중입니다."
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="24sp"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="40dp" />
+
+    <Button
+        android:id="@+id/searchBtn1"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:onClick="GetSearch1"
+        android:text="속보" />
+
+    <Button
+        android:id="@+id/searchBtn2"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:onClick="GetSearch2"
+        android:text="날씨" />
+
+    <Button
+        android:id="@+id/searchBtn3"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:text="코로나"
+        android:onClick="GetSearch3" />
+    <Button
+        android:id="@+id/searchBtn4"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:text="경제"
+        android:onClick="GetSearch4" />
+
+    <Button
+        android:id="@+id/settingBtn"
+        android:layout_marginTop="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="설정"/>
+
+</LinearLayout>
