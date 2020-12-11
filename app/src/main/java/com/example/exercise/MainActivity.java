@@ -16,9 +16,11 @@ public class MainActivity extends AppCompatActivity {
     private Button srchbtn1;
     private Button srchbtn2;
     private Button srchbtn3;
+    private Button srchbtn4;
     private static String srchEngine1 = "http:/m.search.naver.com/search.naver?query=";
     private static String srchEngine2 = "http:/m.search.naver.com/search.naver?query=";
     private static String srchEngine3 = "http:/m.search.naver.com/search.naver?query=";
+    private static String srchEngine4 = "http:/m.search.naver.com/search.naver?query=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onLongClick(View view) {
                 Intent intent = new Intent(MainActivity.this, activity_setting.class);
                 //버튼 값 넘겨주기
+                intent.putExtra("num","1");
                 intent.putExtra("srchbtn1",srchbtn1.getText().toString());
                 startActivityForResult(intent, CODE);
                 return true;
@@ -51,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View view) {
                 Intent intent = new Intent(MainActivity.this, activity_setting.class);
+                //버튼 값 넘겨주기
+                intent.putExtra("num","2");
+                intent.putExtra("srchbtn2",srchbtn2.getText().toString());
                 startActivityForResult(intent, CODE);
 
                 return true;
@@ -71,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View view) {
                 Intent intent = new Intent(MainActivity.this, activity_setting.class);
+                //버튼 값 넘겨주기
+                intent.putExtra("num","3");
+                intent.putExtra("srchbtn3",srchbtn3.getText().toString());
                 startActivityForResult(intent, CODE);
 
                 return true;
@@ -82,6 +91,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(srchEngine3 + srchbtn3.getText().toString()));
+                startActivity(browserIntent);
+            }
+        });
+
+        srchbtn4 = findViewById(R.id.searchBtn4);
+        srchbtn4.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent intent = new Intent(MainActivity.this, activity_setting.class);
+                //버튼 값 넘겨주기
+                intent.putExtra("num","4");
+                intent.putExtra("srchbtn4",srchbtn4.getText().toString());
+                startActivityForResult(intent, CODE);
+
+                return true;
+            }
+        });
+
+        //브라우저 검색
+        srchbtn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(srchEngine4 + srchbtn4.getText().toString()));
                 startActivity(browserIntent);
             }
         });
@@ -97,8 +129,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(requestCode == CODE){
-            srchbtn1.setText(data.getStringExtra("srchword1"));
-            srchEngine1 = data.getStringExtra("srchEngine1");
+            switch (data.getStringExtra("number")){
+                case "1":
+                    srchbtn1.setText(data.getStringExtra("srchword"+data.getStringExtra("number")));
+                    srchEngine1 = data.getStringExtra("srchEngine"+data.getStringExtra("number"));
+                    break;
+                case "2":
+                    srchbtn2.setText(data.getStringExtra("srchword"+data.getStringExtra("number")));
+                    srchEngine2 = data.getStringExtra("srchEngine"+data.getStringExtra("number"));
+                    break;
+                case "3":
+                    srchbtn3.setText(data.getStringExtra("srchword"+data.getStringExtra("number")));
+                    srchEngine3 = data.getStringExtra("srchEngine"+data.getStringExtra("number"));
+                    break;
+                case "4":
+                    srchbtn4.setText(data.getStringExtra("srchword"+data.getStringExtra("number")));
+                    srchEngine4 = data.getStringExtra("srchEngine"+data.getStringExtra("number"));
+                    break;
+            }
         }
     }
 }

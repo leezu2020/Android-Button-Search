@@ -23,6 +23,7 @@ public class activity_setting extends AppCompatActivity {
     private RadioButton rb;
     static String srchEngine;
     private static final int REQUEST_CODE = 1;
+    private static String number = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +36,15 @@ public class activity_setting extends AppCompatActivity {
         srchEngine = "http:/m.search.naver.com/search.naver?query=";
 
         Intent intent_get = getIntent();
-        srchword.setText(intent_get.getStringExtra("srchbtn1"));
+        number = intent_get.getStringExtra("num");
+        srchword.setText(intent_get.getStringExtra("srchbtn"+number));
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.putExtra("srchword1",srchword.getText().toString());
-                intent.putExtra("srchEngine1", srchEngine);
+                intent.putExtra("srchword"+number,srchword.getText().toString());
+                intent.putExtra("srchEngine"+number, srchEngine);
+                intent.putExtra("number",number);
                 setResult(RESULT_OK, intent);
                 finish(); // 현재 액티비티 종료
             }
