@@ -7,18 +7,39 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <Button
-        android:id="@+id/searchBtn1"
+    <EditText
+        android:id="@+id/editsrchword"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="속보"
-        android:onClick="GetSearchEdit"/>
+        android:privateImeOptions="defaultInputmode=korean"
+        />
+    <RadioGroup
+        android:id="@+id/rg"
+        android:checkedButton="@+id/naverbtn"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/naverbtn"
+            android:text="네이버(naver)"
+            android:layout_marginBottom="5dp"
+            android:height="30dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+        <RadioButton
+            android:id="@+id/daumbtn"
+            android:text="다음(daum)"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
 
     <Button
         android:id="@+id/back_main"
         android:layout_marginTop="200dp"
+        android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="돌아가기" />
+        android:text="완료" />
 
 </LinearLayout>

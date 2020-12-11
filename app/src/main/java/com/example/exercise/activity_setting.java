@@ -1,5 +1,6 @@
 package com.example.exercise;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,62 +9,59 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class activity_setting extends AppCompatActivity {
 
+    private RadioGroup rg;
+    private EditText srchword;
     private Button backbtn;
-    final static int CODE = 1;
+    private RadioButton rb;
+    static String srchEngine;
+    private static final int REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting_main);
 
+        rg = findViewById(R.id.rg);
+        srchword = findViewById(R.id.editsrchword);
         backbtn = findViewById(R.id.back_main);
+        srchEngine = "http:/m.search.naver.com/search.naver?query=";
+
+        Intent intent_get = getIntent();
+        srchword.setText(intent_get.getStringExtra("srchbtn1"));
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity_setting.this, MainActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent();
+                intent.putExtra("srchword1",srchword.getText().toString());
+                intent.putExtra("srchEngine1", srchEngine);
+                setResult(RESULT_OK, intent);
+                finish(); // 현재 액티비티 종료
+            }
+        });
+
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                rb = findViewById(i);
+                switch (i) {
+                    case R.id.naverbtn:
+                        srchEngine = "http:/m.search.naver.com/search.naver?query=";
+                        break;
+                    case R.id.daumbtn:
+                        srchEngine = "http:/m.search.daum.net/search?w=tot&q=";
+                        break;
+                }
             }
         });
     }
 
-    public void GetSearchEdit(View view){
-
-        switch (view.getId()){
-            case R.id.searchBtn1:
-                Button btn = findViewById(R.id.searchBtn1);
-                Intent intent = new Intent(activity_setting.this, popupactivity.class);
-                intent.putExtra("srchword", btn.getText().toString());
-                startActivity(intent);
-
-                break;
-        }
-/*        AlertDialog.Builder alert = new AlertDialog.Builder(activity_setting.this);
-
-        alert.setTitle("검색어 변경");
-        alert.setMessage("새로운 검색어를 입력해주세요.");
-
-        final EditText search = new EditText(this);
-        alert.setView(search);
-
-        alert.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String srchbtn = search.getText().toString();
-            }
-        });
-
-        alert.setNegativeButton("no", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });*/
-
-
-    }
 
 }

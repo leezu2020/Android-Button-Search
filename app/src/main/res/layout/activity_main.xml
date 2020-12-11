@@ -24,34 +24,24 @@
         android:id="@+id/searchBtn1"
         android:layout_width="235dp"
         android:layout_height="wrap_content"
-        android:onClick="GetSearch1"
         android:text="속보" />
 
     <Button
         android:id="@+id/searchBtn2"
         android:layout_width="235dp"
         android:layout_height="wrap_content"
-        android:onClick="GetSearch2"
         android:text="날씨" />
 
     <Button
         android:id="@+id/searchBtn3"
         android:layout_width="235dp"
         android:layout_height="wrap_content"
-        android:text="코로나"
-        android:onClick="GetSearch3" />
+        android:text="코로나" />
     <Button
         android:id="@+id/searchBtn4"
         android:layout_width="235dp"
         android:layout_height="wrap_content"
-        android:text="경제"
-        android:onClick="GetSearch4" />
+        android:text="경제" />
 
-    <Button
-        android:id="@+id/settingBtn"
-        android:layout_marginTop="200dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="설정"/>
 
 </LinearLayout>
