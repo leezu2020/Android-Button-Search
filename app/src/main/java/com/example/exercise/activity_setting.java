@@ -26,6 +26,22 @@ public class activity_setting extends AppCompatActivity {
     private static String number = "";
 
     @Override
+    public void onBackPressed() {
+        srchword = findViewById(R.id.editsrchword);
+        if(srchword.getText().toString().isEmpty()){
+            Toast.makeText(activity_setting.this,"검색어를 입력해주세요.", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Intent intent = new Intent();
+            intent.putExtra("srchword"+number,srchword.getText().toString());
+            intent.putExtra("srchEngine"+number, srchEngine);
+            intent.putExtra("number",number);
+            setResult(RESULT_OK, intent);
+            super.onBackPressed();
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting_main);
@@ -74,6 +90,9 @@ public class activity_setting extends AppCompatActivity {
                 }
             }
         });
+
+
+
     }
 
 

@@ -3,6 +3,9 @@ package com.example.exercise;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -21,10 +24,14 @@ public class MainActivity extends AppCompatActivity {
     private Button srchbtn2;
     private Button srchbtn3;
     private Button srchbtn4;
-    private static String srchEngine1;
-    private static String srchEngine2;
-    private static String srchEngine3;
-    private static String srchEngine4;
+    private Button refresh;
+    private static String srchEngine1 = "http:/m.search.naver.com/search.naver?query=";
+    private static String srchEngine2 = "http:/m.search.naver.com/search.naver?query=";
+    private static String srchEngine3 = "http:/m.search.naver.com/search.naver?query=";
+    private static String srchEngine4 = "http:/m.search.naver.com/search.naver?query=";
+
+    private final long FINISH_INTERVAL_TIME = 1500;
+    private  long backPressedTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +42,17 @@ public class MainActivity extends AppCompatActivity {
         srchbtn2 = findViewById(R.id.searchBtn2);
         srchbtn3 = findViewById(R.id.searchBtn3);
         srchbtn4 = findViewById(R.id.searchBtn4);
+        refresh = findViewById(R.id.refresh);
 
         SharedPreferences pref = getSharedPreferences("pref",0);
-        srchbtn1.setText(pref.getString("b1","속보"));
+        srchbtn1.setText(pref.getString("b1","네이버"));
         srchEngine1 = pref.getString("e1","http:/m.search.naver.com/search.naver?query=");
-        srchbtn2.setText(pref.getString("b2","코로나"));
-        srchEngine2 = pref.getString("e2","http:/m.search.naver.com/search.naver?query=");
-        srchbtn3.setText(pref.getString("b3","날씨"));
-        srchEngine3 = pref.getString("e3","http:/m.search.naver.com/search.naver?query=");
-        srchbtn4.setText(pref.getString("b4","경제"));
-        srchEngine4 = pref.getString("e4","http:/m.search.naver.com/search.naver?query=");
+        srchbtn2.setText(pref.getString("b2",""));
+        srchEngine2 = pref.getString("e2","");
+        srchbtn3.setText(pref.getString("b3",""));
+        srchEngine3 = pref.getString("e3","");
+        srchbtn4.setText(pref.getString("b4",""));
+        srchEngine4 = pref.getString("e4","");
 
         srchbtn1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -150,6 +158,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(browserIntent);
             }
         });
+
+        refresh.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Widget.class);
+                intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                MainActivity.this.sendBroadcast(intent);
+            }
+        });
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -208,6 +225,20 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("e3",Engine3);
         editor.putString("e4",Engine4);
 
+
         editor.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        long tempTime = System.currentTimeMillis();
+        long intervalTime = tempTime - backPressedTime;
+
+        if(0<=intervalTime && FINISH_INTERVAL_TIME >= intervalTime){
+            super.onBackPressed();
+        } else{
+            backPressedTime = tempTime;
+            Toast.makeText(getApplicationContext(), "한번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -11,6 +11,7 @@
         android:id="@+id/editsrchword"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:singleLine="true"
         android:privateImeOptions="defaultInputmode=korean"
         />
     <RadioGroup
