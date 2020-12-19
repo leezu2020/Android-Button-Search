@@ -45,14 +45,14 @@ public class MainActivity extends AppCompatActivity {
         refresh = findViewById(R.id.refresh);
 
         SharedPreferences pref = getSharedPreferences("pref",0);
-        srchbtn1.setText(pref.getString("b1","네이버"));
+        srchbtn1.setText(pref.getString("b1","기본"));
         srchEngine1 = pref.getString("e1","http:/m.search.naver.com/search.naver?query=");
-        srchbtn2.setText(pref.getString("b2",""));
-        srchEngine2 = pref.getString("e2","");
-        srchbtn3.setText(pref.getString("b3",""));
-        srchEngine3 = pref.getString("e3","");
-        srchbtn4.setText(pref.getString("b4",""));
-        srchEngine4 = pref.getString("e4","");
+        srchbtn2.setText(pref.getString("b2","검색엔진은"));
+        srchEngine2 = pref.getString("e2","http:/m.search.naver.com/search.naver?query=");
+        srchbtn3.setText(pref.getString("b3","네이버"));
+        srchEngine3 = pref.getString("e3","http:/m.search.naver.com/search.naver?query=");
+        srchbtn4.setText(pref.getString("b4","입니다."));
+        srchEngine4 = pref.getString("e4","http:/m.search.naver.com/search.naver?query=");
 
         srchbtn1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -200,6 +200,36 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // 설정 후에 최소화 시켰을때를 대비
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("pref",0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        String btn1 = srchbtn1.getText().toString();
+        String Engine1 = srchEngine1;
+        String btn2 = srchbtn2.getText().toString();
+        String Engine2 = srchEngine2;
+        String btn3 = srchbtn3.getText().toString();
+        String Engine3 = srchEngine3;
+        String btn4 = srchbtn4.getText().toString();
+        String Engine4 = srchEngine4;
+
+        editor.putString("b1",btn1);
+        editor.putString("b2",btn2);
+        editor.putString("b3",btn3);
+        editor.putString("b4",btn4);
+        editor.putString("e1",Engine1);
+        editor.putString("e2",Engine2);
+        editor.putString("e3",Engine3);
+        editor.putString("e4",Engine4);
+
+
+        editor.commit();
+    }
+    // 앱 종료 후에 설정 값을 pref에 저장
     @Override
     protected void onDestroy() {
         super.onDestroy();

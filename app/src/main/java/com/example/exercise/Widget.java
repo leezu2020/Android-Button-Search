@@ -12,6 +12,9 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
+
 /**
  * Implementation of App Widget functionality.
  */
@@ -29,6 +32,8 @@ public class Widget extends AppWidgetProvider {
     private static String temp_engine3;
     private static String temp_word4;
     private static String temp_engine4;
+
+    private final long FINISH_INTERVAL_TIME = 1000;
 
     private static String uri1;
 
@@ -72,25 +77,48 @@ public class Widget extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        super.onReceive(context, intent);
         String action = intent.getAction();
         // 새로고침(refresh)버튼 눌렀을때, 버튼 4개 갱신
         if(action.equals(ACTION_RE)){
-            SharedPreferences pref = context.getSharedPreferences("pref",0);
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-            RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
-            ComponentName componentName = new ComponentName(context, Widget.class);
-            temp_word1 = pref.getString("b1","실패");
-            remoteViews.setTextViewText(R.id.wbtn1,temp_word1);
-            temp_word2 = pref.getString("b2","실패");
-            remoteViews.setTextViewText(R.id.wbtn2,temp_word2);
-            temp_word3 = pref.getString("b3","실패");
-            remoteViews.setTextViewText(R.id.wbtn3,temp_word3);
-            temp_word4 = pref.getString("b4","실패");
-            remoteViews.setTextViewText(R.id.wbtn4,temp_word4);
-            Toast.makeText(context,"새로고침 완료", Toast.LENGTH_SHORT).show();
-            appWidgetManager.updateAppWidget(componentName, remoteViews);
-            this.onUpdate(context, appWidgetManager, appWidgetManager.getAppWidgetIds(new ComponentName(context, getClass())));
+            //int clickCount = context.getSharedPreferences("cc",Context.MODE_PRIVATE).getInt("clicks",0);
+            //context.getSharedPreferences("cc", Context.MODE_PRIVATE).edit().putInt("clicks", ++clickCount).commit();
+            long tempTime = System.currentTimeMillis();
+            long intervalTime = tempTime - context.getSharedPreferences("cc", Context.MODE_PRIVATE).getLong("rePressedTime",0);
+            //두번 클릭했을때
+            if(0<=intervalTime && FINISH_INTERVAL_TIME >= intervalTime){
+                Toast.makeText(context,"더블클릭 성공." + " "+Long.toString(intervalTime), Toast.LENGTH_SHORT).show();
+                context.getSharedPreferences("cc", Context.MODE_PRIVATE).edit().putLong("rePressedTime", (long)0).commit();
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+                ComponentName componentName = new ComponentName(context, Widget.class);
+                Intent intent_tap_re = new Intent(context, MainActivity.class);
+                PendingIntent pendingIntent_tap_re = PendingIntent.getActivity(context, 0, intent_tap_re, 0);
+                RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
+                remoteViews.setOnClickPendingIntent(R.id.refresh, pendingIntent_tap_re);
+                appWidgetManager.updateAppWidget(componentName, remoteViews);
+                //this.onUpdate(context, appWidgetManager, appWidgetManager.getAppWidgetIds(new ComponentName(context, getClass())));
+                /*PendingIntent pendingIntent_tap_re = PendingIntent.getActivity(context, 0, intent_tap_re, 0);
+                RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
+                remoteViews.setOnClickPendingIntent(R.id.refresh, pendingIntent_tap_re);
+                appWidgetManager.updateAppWidget(componentName, remoteViews);*/
+            } else {
+                context.getSharedPreferences("cc",Context.MODE_PRIVATE).edit().putLong("rePressedTime",System.currentTimeMillis()).commit();
+                SharedPreferences pref = context.getSharedPreferences("pref", 0);
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+                RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
+                ComponentName componentName = new ComponentName(context, Widget.class);
+                temp_word1 = pref.getString("b1", "실패");
+                remoteViews.setTextViewText(R.id.wbtn1, temp_word1);
+                temp_word2 = pref.getString("b2", "실패");
+                remoteViews.setTextViewText(R.id.wbtn2, temp_word2);
+                temp_word3 = pref.getString("b3", "실패");
+                remoteViews.setTextViewText(R.id.wbtn3, temp_word3);
+                temp_word4 = pref.getString("b4", "실패");
+                remoteViews.setTextViewText(R.id.wbtn4, temp_word4);
+                Toast.makeText(context, "새로고침 완료"  +" "+ Long.toString(intervalTime), Toast.LENGTH_SHORT).show();
+                //appWidgetManager.updateAppWidget(componentName, remoteViews);
+                //이거 쓰면 새로고침 누를때마다 한번 더 눌러주세요 뜸.
+                this.onUpdate(context, appWidgetManager, appWidgetManager.getAppWidgetIds(new ComponentName(context, getClass())));
+            }
         }
 
         if(action.equals(ACTION_BTN1)){
@@ -147,7 +175,7 @@ public class Widget extends AppWidgetProvider {
             Toast.makeText(context,"한번 더 눌러주세요.", Toast.LENGTH_SHORT).show();
             appWidgetManager.updateAppWidget(componentName, remoteViews);
         }
-
+        super.onReceive(context, intent);
     }
 
     @Override

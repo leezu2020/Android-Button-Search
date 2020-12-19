@@ -1,49 +1,74 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
+    android:layout_gravity="fill"
     android:background="#09C"
     android:padding="@dimen/widget_margin">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/ll1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_alignRight="@id/ll2">
         <TextView
             android:id="@+id/txt"
-            android:text="                                                                           "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:text=""
+            android:layout_width="200dp"
+            android:layout_height="50dp"/>
         <Button
             android:id="@+id/refresh"
             android:text="새로고침"
-            android:layout_gravity="right"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            android:layout_height="50dp"
+            android:layout_toRightOf="@id/txt"/>
+    </RelativeLayout>
     <LinearLayout
+        android:id="@+id/ll2"
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_below="@id/ll1">
         <Button
             android:id="@+id/wbtn1"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_naver"
             android:textSize="15sp"
-            android:layout_height="50dp"
-            android:layout_width="85dp"/>
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_height="45dp"
+            android:layout_width="75dp"/>
         <Button
             android:id="@+id/wbtn2"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_daum"
             android:textSize="15sp"
-            android:layout_height="50dp"
-            android:layout_width="85dp"/>
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_height="45dp"
+            android:layout_width="75dp"/>
         <Button
             android:id="@+id/wbtn3"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_naver"
             android:textSize="15sp"
-            android:layout_height="50dp"
-            android:layout_width="85dp"/>
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_height="45dp"
+            android:layout_width="75dp"/>
         <Button
             android:id="@+id/wbtn4"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_daum"
             android:textSize="15sp"
-            android:layout_height="50dp"
-            android:layout_width="85dp"/>
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_height="45dp"
+            android:layout_width="75dp"/>
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

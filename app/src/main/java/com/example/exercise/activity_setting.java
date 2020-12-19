@@ -25,6 +25,7 @@ public class activity_setting extends AppCompatActivity {
     private static final int REQUEST_CODE = 1;
     private static String number = "";
 
+    // 확인버튼 안누르고 뒤로가기 눌렀을때, 값 저장
     @Override
     public void onBackPressed() {
         srchword = findViewById(R.id.editsrchword);
@@ -37,6 +38,7 @@ public class activity_setting extends AppCompatActivity {
             intent.putExtra("srchEngine"+number, srchEngine);
             intent.putExtra("number",number);
             setResult(RESULT_OK, intent);
+            Toast.makeText(getApplicationContext(), "변경 완료",Toast.LENGTH_SHORT).show();
             super.onBackPressed();
         }
     }
