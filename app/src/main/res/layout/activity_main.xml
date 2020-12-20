@@ -44,7 +44,7 @@
         android:text="경제" />
 
     <Button
-        android:id="@+id/refresh"
+        android:id="@+id/update_widget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="위젯 업데이트"/>

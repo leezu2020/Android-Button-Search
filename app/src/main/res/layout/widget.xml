@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_gravity="fill"
-    android:background="#09C"
+    android:background="@drawable/bg_widget_main"
     android:padding="@dimen/widget_margin">
 
     <RelativeLayout
@@ -22,9 +22,10 @@
             android:layout_height="50dp"/>
         <Button
             android:id="@+id/refresh"
+            android:background="@drawable/bg_refresh"
             android:text="새로고침"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:layout_toRightOf="@id/txt"/>
     </RelativeLayout>
     <LinearLayout

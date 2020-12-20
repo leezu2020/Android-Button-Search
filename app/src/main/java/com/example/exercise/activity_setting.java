@@ -33,12 +33,12 @@ public class activity_setting extends AppCompatActivity {
             Toast.makeText(activity_setting.this,"검색어를 입력해주세요.", Toast.LENGTH_SHORT).show();
         }
         else {
+            Toast.makeText(getApplicationContext(), "변경 완료",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
             intent.putExtra("srchword"+number,srchword.getText().toString());
             intent.putExtra("srchEngine"+number, srchEngine);
             intent.putExtra("number",number);
             setResult(RESULT_OK, intent);
-            Toast.makeText(getApplicationContext(), "변경 완료",Toast.LENGTH_SHORT).show();
             super.onBackPressed();
         }
     }
@@ -51,7 +51,6 @@ public class activity_setting extends AppCompatActivity {
         rg = findViewById(R.id.rg);
         srchword = findViewById(R.id.editsrchword);
         backbtn = findViewById(R.id.back_main);
-        srchEngine = "http:/m.search.naver.com/search.naver?query=";
 
         Intent intent_get = getIntent();
         number = intent_get.getStringExtra("num");
@@ -60,9 +59,11 @@ public class activity_setting extends AppCompatActivity {
         rb_d = findViewById(R.id.daumbtn);
         switch (intent_get.getStringExtra("srchEngine"+number)){
             case "naver":
+                srchEngine = "http:/m.search.naver.com/search.naver?query=";
                 rg.check(rb_n.getId());
                 break;
             case "daum":
+                srchEngine = "http:/m.search.daum.net/search?w=tot&q=";
                 rg.check(rb_d.getId());
                 break;
         }

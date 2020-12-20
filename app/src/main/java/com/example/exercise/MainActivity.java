@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private Button srchbtn2;
     private Button srchbtn3;
     private Button srchbtn4;
-    private Button refresh;
+    private Button update_widget;
     private static String srchEngine1 = "http:/m.search.naver.com/search.naver?query=";
     private static String srchEngine2 = "http:/m.search.naver.com/search.naver?query=";
     private static String srchEngine3 = "http:/m.search.naver.com/search.naver?query=";
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         srchbtn2 = findViewById(R.id.searchBtn2);
         srchbtn3 = findViewById(R.id.searchBtn3);
         srchbtn4 = findViewById(R.id.searchBtn4);
-        refresh = findViewById(R.id.refresh);
+        update_widget = findViewById(R.id.update_widget);
 
         SharedPreferences pref = getSharedPreferences("pref",0);
         srchbtn1.setText(pref.getString("b1","기본"));
@@ -159,7 +159,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        refresh.setOnClickListener(new View.OnClickListener(){
+        //위젯 업데이트
+        update_widget.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Widget.class);
