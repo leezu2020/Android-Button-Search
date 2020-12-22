@@ -29,7 +29,6 @@ public class Widget extends AppWidgetProvider {
     private static String temp_engine3;
     private static String temp_word4;
     private static String temp_engine4;
-    private static int[] infected = new int[2];
 
 
 
@@ -40,9 +39,13 @@ public class Widget extends AppWidgetProvider {
             SharedPreferences sharedPreferences = context.getSharedPreferences("pref",0);
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(),R.layout.widget);
             remoteViews.setTextViewText(R.id.wbtn1, sharedPreferences.getString("b1","실패"));
+
             remoteViews.setTextViewText(R.id.wbtn2, sharedPreferences.getString("b2","실패"));
+
             remoteViews.setTextViewText(R.id.wbtn3, sharedPreferences.getString("b3","실패"));
+
             remoteViews.setTextViewText(R.id.wbtn4, sharedPreferences.getString("b4","실패"));
+
             remoteViews.setTextViewText(R.id.txt, Html.fromHtml("<font color=\"#9999FF\">" + Integer.toString(sharedPreferences.getInt("i_k", -1)) + "</font>" + " 명 "
                     + "<font color=\"#FF9999\">" + Integer.toString(sharedPreferences.getInt("i_f", -1)) +"</font>" + " 명"))
             ;

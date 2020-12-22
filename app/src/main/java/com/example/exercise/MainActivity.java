@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     // 0은 국내 확진자 1은 해외 확진자
     private int[] infected = new int[2];
+    private String infected_date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -197,6 +198,8 @@ public class MainActivity extends AppCompatActivity {
                         infected[i++] = Integer.parseInt(temp);
                         builder.append("\n").append(temp);
                     }
+                    Elements date = doc.select("div.liveNumOuter h2 a span.livedate");
+                    infected_date = date.text().split(",")[0].replace("(","");
 
 
                 }catch (IOException e){
@@ -206,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        main_txt.setText(Html.fromHtml("총 감염자 수<br /> " + "<font color=\"#000000\">" + Integer.toString(infected[0] + infected[1]) + "</font>"+ "명" + "<br />국내 감염자 수<br />"+"<font color=\"#9999FF\">" + Integer.toString(infected[0]) + "</font> 명"
+                        main_txt.setText(Html.fromHtml("<font color=\"#000000\">" + infected_date + "</font><br />" + "<font color=\"#000000\">" + Integer.toString(infected[0] + infected[1]) + "</font>"+ "명" + "<br />국내 감염자 수<br />"+"<font color=\"#9999FF\">" + Integer.toString(infected[0]) + "</font> 명"
                         + "<br />해외 감염자 수<br /><font color=\"#FF9999\">" + Integer.toString(infected[1]) +"</font> 명"));
                         /*Html.fromHtml("<font size='40' color=\"#9999FF\">" + Integer.toString(sharedPreferences.getInt("i_k", -1)) + "</font>" + " 명 "
                                 + "<font size='40' color=\"#FF9999\">" + Integer.toString(sharedPreferences.getInt("i_f", -1)) +"</font>" + " 명")*/
@@ -275,6 +278,7 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("e4",Engine4);
 
         //감염자 수 저장
+        editor.putString("i_d",infected_date);
         editor.putInt("i_k",infected[0]);
         editor.putInt("i_f",infected[1]);
 
@@ -312,6 +316,7 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("e4",Engine4);
 
         //감염자 수 저장
+        editor.putString("i_d",infected_date);
         editor.putInt("i_k",infected[0]);
         editor.putInt("i_f",infected[1]);
 

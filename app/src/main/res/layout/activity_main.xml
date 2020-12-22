@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/main_txt"
-        android:layout_width="290dp"
+        android:layout_width="350dp"
         android:textAlignment="center"
         android:layout_height="300dp"
         android:padding="16dp"
