@@ -12,7 +12,7 @@
 <img src="https://user-images.githubusercontent.com/72802137/103617322-69365800-4f71-11eb-8ad1-c2561581f3dd.jpg" width="300">
 4. 버튼을 누르면 설정된 검색엔진에 검색어를 입력해 사이트를 띄워준다.
 
-<br/>
+<br/><br/><br/>
 
 **참고 사항**
 
