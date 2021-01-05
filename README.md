@@ -4,12 +4,12 @@
 
 **사용 방법**
 1. 어플을 실행시킨뒤, 버튼을 길게 누른다.
-![KakaoTalk_20210105_160216349_01](https://user-images.githubusercontent.com/72802137/103617312-663b6780-4f71-11eb-858d-24199a4bc210.jpg)
+<img src="https://user-images.githubusercontent.com/72802137/103617312-663b6780-4f71-11eb-858d-24199a4bc210.jpg" width="500">
 2. 설정창에서 검색어를 설정하고, 검색엔진(네이버/다음)을 선택하여 저장한다.
 >입력하고, 뒤로가기로도 설정 자동 저장
-![KakaoTalk_20210105_160216349_02](https://user-images.githubusercontent.com/72802137/103617317-689dc180-4f71-11eb-85bc-ee1fa3edeeb2.jpg)
+<img src="https://user-images.githubusercontent.com/72802137/103617317-689dc180-4f71-11eb-85bc-ee1fa3edeeb2.jpg" width="500">
 3. 스마트폰 화면에 위젯을 추가한다.
-![KakaoTalk_20210105_160216349](https://user-images.githubusercontent.com/72802137/103617322-69365800-4f71-11eb-8ad1-c2561581f3dd.jpg)
+<img src="https://user-images.githubusercontent.com/72802137/103617322-69365800-4f71-11eb-8ad1-c2561581f3dd.jpg" width="500">
 4. 버튼을 누르면 설정된 검색엔진에 검색어를 입력해 사이트를 띄워준다.
 
 *위젯에서 코로나 확진자 수 부분을 누르면 어플 실행이 됩니다.
